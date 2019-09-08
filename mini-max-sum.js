@@ -4,7 +4,7 @@ function miniMaxSumObj(arr) {
 
     let i = 0;
 
-    while (i < n) {
+    while (n--) {
         let arSum = 0;
         for (let j = 0; j < n; j++) {
             if (i !== j)
@@ -37,7 +37,7 @@ function miniMaxSumArr(arr) {
         i++;
     }
 
-    result.sort(function(a,b){return a-b});
+    result.sort(function (a, b) { return a - b });
 
     const first = result[0];
     const last = result[result.length - 1];
@@ -45,6 +45,70 @@ function miniMaxSumArr(arr) {
     return first + " " + last;
 }
 
-const result = miniMaxSumArr([1,2,3,4,5]);
+function miniMaxSum(arr) {
+    const n = arr.length;
+    let result = [];
+
+    let i = 0;
+
+    while (i < n) {
+        let arSum = 0;
+        for (let j = 0; j < n; j++) {
+            if (i !== j)
+                arSum += arr[j];
+        }
+        result[i] = arSum;
+        i++;
+    }
+    
+    return getMinNumber(result) + " " + getMaxNumber(result);
+}
+
+function getMaxNumber(arr) {
+    let len = arr.length;
+    let max = -Infinity;
+
+    while (len--) {
+        if (arr[len] > max) {
+            max = arr[len];
+        }
+    }
+
+    return max;
+}
+
+function getMinNumber(arr) {
+    let len = arr.length;
+    let min = Infinity;
+
+    while (len--) {
+        if (arr[len] < min) {
+            min = arr[len];
+        }
+    }
+
+    return min;
+}
+
+function miniMaxSumByMathFunc(arr) {
+    const n = arr.length;
+    let result = [];
+
+    let i = 0;
+
+    while (i < n) {
+        let arSum = 0;
+        for (let j = 0; j < n; j++) {
+            if (i !== j)
+                arSum += arr[j];
+        }
+        result[i] = arSum;
+        i++;
+    }
+
+    return Math.min.apply(null, result) + " " + Math.max.apply(null, result);
+}
+
+const result = miniMaxSumByMathFunc([1, 2, 3, 4, 5]);
 
 console.log(result);
